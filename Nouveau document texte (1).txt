@@ -1,0 +1,184 @@
+import copy
+from print_helper import print2D
+
+
+
+
+b = 0
+a = []
+
+
+class back:
+    def __init__(self, weight, usefulness):
+        self.weight = weight
+        self.usefulness =usefulness
+ 
+    def __repr__(self):
+        return '{' + str(self.weight) + ', ' + str(self.utility) + '}'
+
+
+class node : 
+    
+    def __init__(self,fixed_vars):
+        self.fixed_vars = fixed_vars
+        self.a = []
+        self.z = None
+        self.left = None
+        self.right = None
+    
+ 
+    def evaluate(self) :
+        a = []
+        left_weight = max_weight
+        z = 0
+
+        for i in range(len(back)): 
+            try : 
+                if self.fixed_vars[i] == 1 : 
+                    if back[i].weight > left_weight : 
+                        return
+                    left_weight -= back[i].weight
+                    z +=  back[i].usefulness
+                a.append(self.fixed_vars[i])
+            except :
+                break            
+
+
+        for object in back[len(self.fixed_vars):] : 
+            if object.weight <= left_weight : 
+                a.append(1)
+                left_weight -= object.weight
+                z +=  object.usefulness
+            
+            else :
+                a.append(0)
+        self.a = a
+        self.z = z
+
+    ### 3b
+    def separate(self) : 
+        
+        # if there are still more a, go deeper
+        if len(self.fixed_vars) != len(self.a) : 
+            
+            left_vars  = copy.deepcopy(self.fixed_vars)
+            right_vars = copy.deepcopy(self.fixed_vars)
+
+            left_vars.append(1)
+            right_vars.append(0)
+
+            s
+            self.left = node(left_vars)
+            self.right = node(right_vars)
+        else : 
+            pass
+        
+    def execute(self) : 
+        self.evaluate()
+        if self.z is None : 
+            return
+        if self.z >= b : 
+            update_borne(self.z, self.a)
+            
+            self.separate()
+            if self.left is not None : 
+                self.left.execute()
+            if self.right is not None : 
+                self.right.execute()
+        
+    def __repr__(self):
+        left_part = ""
+        right_part = ""
+        if self.left is not None : 
+            left_part = self.left
+        if self.right is not None : 
+            right_part = self.right
+
+        return '\n{' + str(self.z) + ', ' + str(self.a) + '}\n left : '+str(left_part)+'\n right : '+str(right_part)
+
+
+
+def sorting (back) : 
+    back.sort(key=lambda x:(x.utility/x.weight), reverse=True)
+
+
+def initial_solution(back) : 
+    a = []
+    left_weight = max_weight
+    z = 0
+
+    for object in backb : 
+        if object.weight <= left_weight : 
+            a.append(1)
+            left_weight = left_weight - object.weight
+            z += object.utility
+        else :
+            a.append(0)
+        
+    return a, z
+
+def update_borne(z, vars) : 
+    global b
+    global a
+
+    b = z
+    
+    a = vars
+
+def filter_fixed(value):
+    
+    return value == 1
+
+
+back = []
+
+max_weight = 0
+
+
+def main():
+ 
+    global a
+    global z 
+    global backpack_objects 
+    global max_weight 
+
+    typing = True
+
+    while typing : 
+       
+        try : 
+           
+
+
+            back = [
+                back(6,12),
+                back(3,8),
+                back(9,20),
+                back (5,9),
+                back(3,6),
+                back(7,16),
+            ]
+            max_weight = 17
+
+            sorting(back)
+            a,z = initial_solution(backpack_objects)
+
+            update_borne(z,a)
+
+            root_node = node([])
+
+            ### 5
+            root_node.execute()
+
+            print('the solution for P is : ', b)
+            print("with the a as : ", a)
+
+            # print(root_node)
+            print2D(root_node)
+            typing =False
+        except : 
+            print(" saisir un nombre \n")
+            pass
+
+
+main()
